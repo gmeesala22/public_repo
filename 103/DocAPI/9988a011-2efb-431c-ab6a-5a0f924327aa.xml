@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><bns:Component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bns="http://api.platform.boomi.com/" folderFullPath="SAGEIT/DocAPI" componentId="9988a011-2efb-431c-ab6a-5a0f924327aa" version="1" name="Aggregate Prompt Messages 2 2" type="process" createdDate="2024-09-08T09:24:21Z" createdBy="gmeesala@sageitinc.com" modifiedDate="2024-09-08T09:24:21Z" modifiedBy="gmeesala@sageitinc.com" deleted="false" currentVersion="true" folderName="DocAPI" folderId="Rjo2OTg5NDYz" branchName="main" branchId="Qjo0NDM5ODU"><bns:encryptedValues/><bns:description></bns:description><bns:object><process xmlns="" allowSimultaneous="false" enableUserLog="false" processLogOnErrorOnly="false" purgeDataImmediately="false" updateRunDates="false" workload="general"><shapes><shape image="start" name="shape1" shapetype="start" userlabel="" x="48.0" y="46.0"><configuration><passthroughaction/>
+                    </configuration><dragpoints><dragpoint name="shape1.dragpoint1" toShape="shape2" x="224.0" y="56.0"/>
+                    </dragpoints>
+                </shape><shape image="branch_icon" name="shape2" shapetype="branch" userlabel="" x="240.0" y="48.0"><configuration><branch numBranches="2"/>
+                    </configuration><dragpoints><dragpoint identifier="1" name="shape2.dragpoint1" text="1" toShape="shape3" x="416.0" y="56.0"/><dragpoint identifier="2" name="shape2.dragpoint2" text="2" toShape="shape4" x="416.0" y="216.0"/>
+                    </dragpoints>
+                </shape><shape image="documentproperties_icon" name="shape3" shapetype="documentproperties" userlabel="Populates the system message (instructions) and role properties" x="432.0" y="48.0"><configuration><documentproperties><documentproperty defaultValue="" isDynamicCredential="false" isTradingPartner="false" name="Dynamic Document Property - DDP_ROLE" persist="false" propertyId="dynamicdocument.DDP_ROLE" shouldEncrypt="false"><sourcevalues><parametervalue key="2" valueType="static"><staticparameter staticproperty="system"/>
+                                    </parametervalue>
+                                </sourcevalues>
+                            </documentproperty><documentproperty defaultValue="" isDynamicCredential="false" isTradingPartner="false" name="Dynamic Document Property - DDP_CONTENT" persist="false" propertyId="dynamicdocument.DDP_CONTENT" shouldEncrypt="false"><sourcevalues><parametervalue key="3" valueType="track"><trackparameter defaultValue="" propertyId="dynamicdocument.DDP_INSTRUCTIONS" propertyName="Dynamic Document Property - DDP_INSTRUCTIONS"/>
+                                    </parametervalue>
+                                </sourcevalues>
+                            </documentproperty>
+                        </documentproperties>
+                    </configuration><dragpoints><dragpoint name="shape3.dragpoint1" toShape="shape5" x="640.0" y="56.0"/>
+                    </dragpoints>
+                </shape><shape image="documentproperties_icon" name="shape4" shapetype="documentproperties" userlabel="Populates the user message and role properties" x="432.0" y="208.0"><configuration><documentproperties><documentproperty defaultValue="" isDynamicCredential="false" isTradingPartner="false" name="Dynamic Document Property - DDP_ROLE" persist="false" propertyId="dynamicdocument.DDP_ROLE" shouldEncrypt="false"><sourcevalues><parametervalue key="2" valueType="static"><staticparameter staticproperty="user"/>
+                                    </parametervalue>
+                                </sourcevalues>
+                            </documentproperty><documentproperty defaultValue="" isDynamicCredential="false" isTradingPartner="false" name="Dynamic Document Property - DDP_CONTENT" persist="false" propertyId="dynamicdocument.DDP_CONTENT" shouldEncrypt="false"><sourcevalues><parametervalue key="3" valueType="track"><trackparameter defaultValue="" propertyId="dynamicdocument.DDP_QUERY" propertyName="Dynamic Document Property - DDP_QUERY"/>
+                                    </parametervalue>
+                                </sourcevalues>
+                            </documentproperty>
+                        </documentproperties>
+                    </configuration><dragpoints><dragpoint name="shape4.dragpoint1" toShape="shape5" x="640.0" y="56.0"/>
+                    </dragpoints>
+                </shape><shape image="map_icon" name="shape5" shapetype="map" userlabel="" x="656.0" y="48.0"><configuration><map mapId="da7ecc18-a812-4476-a804-af01ac7d8769"/>
+                    </configuration><dragpoints><dragpoint name="shape5.dragpoint1" toShape="shape8" x="880.0" y="56.0"/>
+                    </dragpoints>
+                </shape><shape image="note_icon" name="shape7" shapetype="note" x="64.0" y="123.0"><configuration><note createdBy="chris.cappetta@boomi.com"><noteText>We aggregate the various parts of a chat completion prompt in a subprocess like this so that all of the parts are returned to the parent process at the same time, and can therefore be easily combined into a single message array.</noteText>
+                        </note>
+                    </configuration><dragpoints/>
+                </shape><shape image="processcall_icon" name="shape8" shapetype="processcall" userlabel="" x="896.0" y="48.0"><configuration><processcall abort="true" processId="95401b3b-caa4-4690-bd2f-1790e1f9581e" wait="true"><parameters/><returnpaths/>
+                        </processcall>
+                    </configuration><dragpoints/>
+                </shape>
+            </shapes>
+        </process></bns:object><bns:processOverrides/></bns:Component>
