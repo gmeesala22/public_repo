@@ -1,0 +1,426 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Component xmlns:ns2="http://www.boomi.com/connector/annotation"
+xmlns:ns3="http://exacttarget.com/wsdl/partnerAPI"
+xmlns:ns4="urn:fault.partner.exacttarget.com"
+xmlns:ns5="http://schemas.boomi.com/sap/edi_dc40"
+xmlns:ns6="http://schemas.microsoft.com/2003/10/Serialization/"
+deleted="false">
+  <Id>95401b3b-caa4-4690-bd2f-1790e1f9581e</Id>
+  <Type>process</Type>
+  <Name>Dynamic Process Routing - Agent Tooling</Name>
+  <Version>2</Version>
+  <FolderId name="SAGEIT/DocAPI">6989463</FolderId>
+  <AccountId>sageit-EKDF30</AccountId>
+  <Properties>
+    <Property>
+      <Name>overrides-enabled</Name>
+      <Value>false</Value>
+    </Property>
+    <Property>
+      <Name>startshape-type</Name>
+      <Value>NOACTION</Value>
+    </Property>
+  </Properties>
+  <References>
+    <Ref compId="3b6452f2-38f6-4ff2-b6a2-a5262bff9f19"
+    refId="shape4-step1-profile"
+    name="j.OpenAI.ChatCompletion.REQ" />
+    <Ref compId="6ad8f309-07f3-4284-9aab-0425cefdab78"
+    refId="shape6"
+    name="Maps Message Array to Self and Populates Top Level Parameters" />
+    <Ref compId="24b33e4c-6ce5-418d-8123-764f2cb9e8d2"
+    refId="shape7-parameter-0-profile"
+    name="j.AgentTooling.KeywordRouting" />
+    <Ref compId="24b33e4c-6ce5-418d-8123-764f2cb9e8d2"
+    refId="shape7-parameter-1-profile"
+    name="j.AgentTooling.KeywordRouting" />
+    <Ref compId="a2d0913c-c0af-414a-979b-67178167d4b5"
+    refId="shape8-parameter-0-profile"
+    name="j.OpenAI.ChatCompletion.RESP" />
+    <Ref compId="24b33e4c-6ce5-418d-8123-764f2cb9e8d2"
+    refId="shape11-parameter-undefined-profile"
+    name="j.AgentTooling.KeywordRouting" />
+  </References>
+  <Description />
+  <Object>
+    <process allowSimultaneous="false" enableUserLog="false"
+    updateRunDates="true" processLogOnErrorOnly="false"
+    workload="general" purgeDataImmediately="false">
+      <shapes>
+        <shape name="shape1" userlabel="" image="start" x="48.0"
+        y="46.0" shapetype="start">
+          <configuration>
+            <noaction />
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape1.dragpoint1" toShape="shape4"
+            x="608.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape4"
+        userlabel="Combines the parts of the prompt into a single array of messages"
+        image="dataprocess_icon" x="624.0" y="48.0"
+        shapetype="dataprocess">
+          <configuration>
+            <dataprocess>
+              <step name="Combine Documents" processtype="9"
+              index="1" key="1">
+                <dataprocesscombine profileType="json">
+                  <JSONOptions profileId="3b6452f2-38f6-4ff2-b6a2-a5262bff9f19"
+                  linkElementKey="6"
+                  linkElementName="ArrayElement1 (Root/Object/messages/Array/ArrayElement1)"
+                  combineIntoLinkElementKey="null" />
+                </dataprocesscombine>
+              </step>
+            </dataprocess>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape4.dragpoint1" toShape="shape6"
+            x="800.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape5" userlabel="Standard path example"
+        image="documentproperties_icon" x="240.0" y="48.0"
+        shapetype="documentproperties">
+          <configuration>
+            <documentproperties>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_INSTRUCTIONS"
+              propertyId="dynamicdocument.DDP_INSTRUCTIONS"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="1">
+                    <staticparameter staticproperty="You are an assistant tasked with identifying the 'routing intent' of user queries. Your goal is to determine the appropriate routing keyword based on the content of the query. Do not provide a response to the query itself. Analyze the query and identify whether it falls into one of the following categories: Human Resources (&quot;human_resources&quot;) Sales (&quot;sales&quot;) Training (&quot;training&quot;) If none of these categories are specifically identified, use the keyword &quot;standard&quot;. Respond only with a JSON payload in the following format: { &quot;routing_keyword&quot;: &quot;string&quot;, &quot;justification&quot;: &quot;string&quot; } routing_keyword: One of the keywords &quot;human_resources&quot;, &quot;sales&quot;, &quot;training&quot;, or &quot;standard&quot;. justification: A brief explanation of why this keyword was chosen. Do not include any additional text or responses." />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_QUERY"
+              propertyId="dynamicdocument.DDP_QUERY"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="2">
+                    <staticparameter staticproperty="I like turtles" />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+            </documentproperties>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape5.dragpoint1" toShape="unset"
+            x="416.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape6" userlabel="" image="map_icon"
+        x="816.0" y="48.0" shapetype="map">
+          <configuration>
+            <map mapId="6ad8f309-07f3-4284-9aab-0425cefdab78" />
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape6.dragpoint1" toShape="shape8"
+            x="1232.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape7"
+        userlabel="Shows the routing decision from the LLM in the test mode log. From here, depending on use case, it could be static rule based routing. But conversely it could call into listener or event stream processes based on the routing_keyword identified."
+        image="notify_icon" x="1664.0" y="48.0" shapetype="notify">
+          <configuration>
+            <notify title="" disableEvent="true"
+            enableUserLog="false" perExecution="false">
+              <notifyMessage>Parsed JSON Fields: routing_keyword:
+              {1} justification: {2}</notifyMessage>
+              <notifyMessageLevel>INFO</notifyMessageLevel>
+              <notifyParameters>
+                <parametervalue valueType="profile" key="0">
+                  <profileelement elementId="3"
+                  elementName="routing_keyword (Root/Object/routing_keyword)"
+                  profileId="24b33e4c-6ce5-418d-8123-764f2cb9e8d2"
+                  profileType="profile.json" />
+                </parametervalue>
+                <parametervalue valueType="profile" key="1">
+                  <profileelement elementId="4"
+                  elementName="justification (Root/Object/justification)"
+                  profileId="24b33e4c-6ce5-418d-8123-764f2cb9e8d2"
+                  profileType="profile.json" />
+                </parametervalue>
+              </notifyParameters>
+            </notify>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape7.dragpoint1" toShape="shape11"
+            x="1872.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape8"
+        userlabel="Isolates the LLM reply to be the current document."
+        image="message_icon" x="1248.0" y="48.0"
+        shapetype="message">
+          <configuration>
+            <message combined="false">
+              <msgTxt>{1}</msgTxt>
+              <msgParameters>
+                <parametervalue valueType="profile" key="0">
+                  <profileelement elementId="16"
+                  elementName="content (Root/Object/choices/Array/ArrayElement1/Object/message/Object/content)"
+                  profileId="a2d0913c-c0af-414a-979b-67178167d4b5"
+                  profileType="profile.json" />
+                </parametervalue>
+              </msgParameters>
+            </message>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape8.dragpoint1" toShape="shape9"
+            x="1456.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape9"
+        userlabel="Cleans the code block markdown from the LLM response"
+        image="dataprocess_icon" x="1472.0" y="48.0"
+        shapetype="dataprocess">
+          <configuration>
+            <dataprocess>
+              <step name="Search/Replace" processtype="1" index="1"
+              key="1">
+                <dataprocessreplace texttofind="```json"
+                replacewith="" searchCharacterLimit="1024"
+                searchType="char_limit" />
+              </step>
+              <step name="Search/Replace" processtype="1" index="2"
+              key="2">
+                <dataprocessreplace texttofind="```" replacewith=""
+                searchCharacterLimit="1024"
+                searchType="char_limit" />
+              </step>
+            </dataprocess>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape9.dragpoint1" toShape="shape7"
+            x="1648.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape11" userlabel="" image="route_icon"
+        x="1888.0" y="48.0" shapetype="route">
+          <configuration>
+            <route>
+              <routeproperty valueType="profile">
+                <profileelement elementId="3"
+                elementName="routing_keyword (Root/Object/routing_keyword)"
+                profileId="24b33e4c-6ce5-418d-8123-764f2cb9e8d2"
+                profileType="profile.json" />
+              </routeproperty>
+              <routevalues>
+                <routevalue qualifier="equals"
+                name="Equal To standard" key="3"
+                value="standard" />
+                <routevalue qualifier="equals"
+                name="Equal To human_resources" key="4"
+                value="human_resources" />
+                <routevalue qualifier="equals"
+                name="Equal To training" key="5"
+                value="training" />
+                <routevalue qualifier="equals"
+                name="Equal To sales" key="6" value="sales" />
+              </routevalues>
+            </route>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape11.dragpoint1" toShape="shape12"
+            identifier="default" text="Default" x="2048.0"
+            y="56.0" />
+            <dragpoint name="shape11.dragpoint2" toShape="shape13"
+            identifier="3" text="1 - Equal To standard" x="2048.0"
+            y="216.0" />
+            <dragpoint name="shape11.dragpoint3" toShape="shape14"
+            identifier="4" text="2 - Equal To human_resources"
+            x="2048.0" y="376.0" />
+            <dragpoint name="shape11.dragpoint4" toShape="shape15"
+            identifier="5" text="3 - Equal To training" x="2048.0"
+            y="536.0" />
+            <dragpoint name="shape11.dragpoint5" toShape="shape16"
+            identifier="6" text="4 - Equal To sales" x="2048.0"
+            y="696.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape12" userlabel="" image="notify_icon"
+        x="2064.0" y="48.0" shapetype="notify">
+          <configuration>
+            <notify title="" disableEvent="true"
+            enableUserLog="false" perExecution="false">
+              <notifyMessage />
+              <notifyMessageLevel>INFO</notifyMessageLevel>
+              <notifyParameters />
+            </notify>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape12.dragpoint1" toShape="unset"
+            x="2240.0" y="58.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape13" userlabel="" image="notify_icon"
+        x="2064.0" y="208.0" shapetype="notify">
+          <configuration>
+            <notify title="" disableEvent="true"
+            enableUserLog="false" perExecution="false">
+              <notifyMessage />
+              <notifyMessageLevel>INFO</notifyMessageLevel>
+              <notifyParameters />
+            </notify>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape13.dragpoint1" toShape="unset"
+            x="2240.0" y="218.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape14" userlabel="" image="notify_icon"
+        x="2064.0" y="368.0" shapetype="notify">
+          <configuration>
+            <notify title="" disableEvent="true"
+            enableUserLog="false" perExecution="false">
+              <notifyMessage />
+              <notifyMessageLevel>INFO</notifyMessageLevel>
+              <notifyParameters />
+            </notify>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape14.dragpoint1" toShape="unset"
+            x="2240.0" y="378.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape15" userlabel="" image="notify_icon"
+        x="2064.0" y="528.0" shapetype="notify">
+          <configuration>
+            <notify title="" disableEvent="true"
+            enableUserLog="false" perExecution="false">
+              <notifyMessage />
+              <notifyMessageLevel>INFO</notifyMessageLevel>
+              <notifyParameters />
+            </notify>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape15.dragpoint1" toShape="unset"
+            x="2240.0" y="538.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape16" userlabel="" image="notify_icon"
+        x="2064.0" y="688.0" shapetype="notify">
+          <configuration>
+            <notify title="" disableEvent="true"
+            enableUserLog="false" perExecution="false">
+              <notifyMessage />
+              <notifyMessageLevel>INFO</notifyMessageLevel>
+              <notifyParameters />
+            </notify>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape16.dragpoint1" toShape="unset"
+            x="2240.0" y="698.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape17" userlabel="Sales path example"
+        image="documentproperties_icon" x="240.0" y="144.0"
+        shapetype="documentproperties">
+          <configuration>
+            <documentproperties>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_INSTRUCTIONS"
+              propertyId="dynamicdocument.DDP_INSTRUCTIONS"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="1">
+                    <staticparameter staticproperty="You are an assistant tasked with identifying the 'routing intent' of user queries. Your goal is to determine the appropriate routing keyword based on the content of the query. Do not provide a response to the query itself. Analyze the query and identify whether it falls into one of the following categories: Human Resources (&quot;human_resources&quot;) Sales (&quot;sales&quot;) Training (&quot;training&quot;) If none of these categories are specifically identified, use the keyword &quot;standard&quot;. Respond only with a JSON payload in the following format: { &quot;routing_keyword&quot;: &quot;string&quot;, &quot;justification&quot;: &quot;string&quot; } routing_keyword: One of the keywords &quot;human_resources&quot;, &quot;sales&quot;, &quot;training&quot;, or &quot;standard&quot;. justification: A brief explanation of why this keyword was chosen. Do not include any additional text or responses." />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_QUERY"
+              propertyId="dynamicdocument.DDP_QUERY"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="2">
+                    <staticparameter staticproperty="What does your product cost?" />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+            </documentproperties>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape17.dragpoint1" toShape="unset"
+            x="416.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape18" userlabel="HR path example"
+        image="documentproperties_icon" x="240.0" y="208.0"
+        shapetype="documentproperties">
+          <configuration>
+            <documentproperties>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_INSTRUCTIONS"
+              propertyId="dynamicdocument.DDP_INSTRUCTIONS"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="1">
+                    <staticparameter staticproperty="You are an assistant tasked with identifying the 'routing intent' of user queries. Your goal is to determine the appropriate routing keyword based on the content of the query. Do not provide a response to the query itself. Analyze the query and identify whether it falls into one of the following categories: Human Resources (&quot;human_resources&quot;) Sales (&quot;sales&quot;) Training (&quot;training&quot;) If none of these categories are specifically identified, use the keyword &quot;standard&quot;. Respond only with a JSON payload in the following format: { &quot;routing_keyword&quot;: &quot;string&quot;, &quot;justification&quot;: &quot;string&quot; } routing_keyword: One of the keywords &quot;human_resources&quot;, &quot;sales&quot;, &quot;training&quot;, or &quot;standard&quot;. justification: A brief explanation of why this keyword was chosen. Do not include any additional text or responses." />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_QUERY"
+              propertyId="dynamicdocument.DDP_QUERY"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="2">
+                    <staticparameter staticproperty="Where can I find how much PTO I have left?" />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+            </documentproperties>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape18.dragpoint1" toShape="unset"
+            x="416.0" y="56.0" />
+          </dragpoints>
+        </shape>
+        <shape name="shape19" userlabel="Training path example"
+        image="documentproperties_icon" x="240.0" y="272.0"
+        shapetype="documentproperties">
+          <configuration>
+            <documentproperties>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_INSTRUCTIONS"
+              propertyId="dynamicdocument.DDP_INSTRUCTIONS"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="1">
+                    <staticparameter staticproperty="You are an assistant tasked with identifying the 'routing intent' of user queries. Your goal is to determine the appropriate routing keyword based on the content of the query. Do not provide a response to the query itself. Analyze the query and identify whether it falls into one of the following categories: Human Resources (&quot;human_resources&quot;) Sales (&quot;sales&quot;) Training (&quot;training&quot;) If none of these categories are specifically identified, use the keyword &quot;standard&quot;. Respond only with a JSON payload in the following format: { &quot;routing_keyword&quot;: &quot;string&quot;, &quot;justification&quot;: &quot;string&quot; } routing_keyword: One of the keywords &quot;human_resources&quot;, &quot;sales&quot;, &quot;training&quot;, or &quot;standard&quot;. justification: A brief explanation of why this keyword was chosen. Do not include any additional text or responses." />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+              <documentproperty persist="false"
+              name="Dynamic Document Property - DDP_QUERY"
+              propertyId="dynamicdocument.DDP_QUERY"
+              defaultValue="" isTradingPartner="false"
+              isDynamicCredential="false" shouldEncrypt="false">
+                <sourcevalues>
+                  <parametervalue valueType="static" key="2">
+                    <staticparameter staticproperty="How do I get my certifications?" />
+                  </parametervalue>
+                </sourcevalues>
+              </documentproperty>
+            </documentproperties>
+          </configuration>
+          <dragpoints>
+            <dragpoint name="shape19.dragpoint1" toShape="unset"
+            x="398.0" y="146.0" />
+          </dragpoints>
+        </shape>
+      </shapes>
+    </process>
+  </Object>
+</Component>

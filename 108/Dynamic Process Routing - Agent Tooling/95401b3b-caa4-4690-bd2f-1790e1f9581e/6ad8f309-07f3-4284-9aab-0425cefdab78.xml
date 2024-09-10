@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Component xmlns:ns2="http://www.boomi.com/connector/annotation"
+xmlns:ns3="http://exacttarget.com/wsdl/partnerAPI"
+xmlns:ns4="urn:fault.partner.exacttarget.com"
+xmlns:ns5="http://schemas.boomi.com/sap/edi_dc40"
+xmlns:ns6="http://schemas.microsoft.com/2003/10/Serialization/"
+deleted="false">
+  <Id>6ad8f309-07f3-4284-9aab-0425cefdab78</Id>
+  <Type>transform.map</Type>
+  <Name>Maps Message Array to Self and Populates Top Level
+  Parameters</Name>
+  <Version>1</Version>
+  <FolderId name="SAGEIT/DocAPI">6989463</FolderId>
+  <AccountId>sageit-EKDF30</AccountId>
+  <Properties />
+  <References>
+    <Ref compId="3b6452f2-38f6-4ff2-b6a2-a5262bff9f19"
+    refId="fromProfile" name="j.OpenAI.ChatCompletion.REQ" />
+    <Ref compId="3b6452f2-38f6-4ff2-b6a2-a5262bff9f19"
+    refId="toProfile" name="j.OpenAI.ChatCompletion.REQ" />
+  </References>
+  <Description />
+  <Object>
+    <Map fromProfile="3b6452f2-38f6-4ff2-b6a2-a5262bff9f19"
+    toProfile="3b6452f2-38f6-4ff2-b6a2-a5262bff9f19">
+      <Mappings>
+        <Mapping fromKey="8"
+        fromKeyPath="*[@key='1']/*[@key='2']/*[@key='4']/*[@key='5']/*[@key='6']/*[@key='7']/*[@key='8']"
+        fromNamePath="Root/Object/messages/Array/ArrayElement1/Object/role"
+        fromType="profile" toKey="8"
+        toKeyPath="*[@key='1']/*[@key='2']/*[@key='4']/*[@key='5']/*[@key='6']/*[@key='7']/*[@key='8']"
+        toNamePath="Root/Object/messages/Array/ArrayElement1/Object/role"
+        toType="profile" />
+        <Mapping fromKey="9"
+        fromKeyPath="*[@key='1']/*[@key='2']/*[@key='4']/*[@key='5']/*[@key='6']/*[@key='7']/*[@key='9']"
+        fromNamePath="Root/Object/messages/Array/ArrayElement1/Object/content"
+        fromType="profile" toKey="9"
+        toKeyPath="*[@key='1']/*[@key='2']/*[@key='4']/*[@key='5']/*[@key='6']/*[@key='7']/*[@key='9']"
+        toNamePath="Root/Object/messages/Array/ArrayElement1/Object/content"
+        toType="profile" />
+      </Mappings>
+      <Functions optimizeExecutionOrder="true" />
+      <Defaults>
+        <Default toKey="3" value="gpt-4o" />
+      </Defaults>
+      <DocumentCacheJoins />
+    </Map>
+  </Object>
+</Component>

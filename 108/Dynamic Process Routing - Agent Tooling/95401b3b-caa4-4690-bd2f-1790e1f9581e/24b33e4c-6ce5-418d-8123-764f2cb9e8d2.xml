@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Component xmlns:ns2="http://www.boomi.com/connector/annotation"
+xmlns:ns3="http://exacttarget.com/wsdl/partnerAPI"
+xmlns:ns4="urn:fault.partner.exacttarget.com"
+xmlns:ns5="http://schemas.boomi.com/sap/edi_dc40"
+xmlns:ns6="http://schemas.microsoft.com/2003/10/Serialization/"
+deleted="false">
+  <Id>24b33e4c-6ce5-418d-8123-764f2cb9e8d2</Id>
+  <Type>profile.json</Type>
+  <Name>j.AgentTooling.KeywordRouting</Name>
+  <Version>1</Version>
+  <FolderId name="SAGEIT/DocAPI">6989463</FolderId>
+  <AccountId>sageit-EKDF30</AccountId>
+  <Properties />
+  <References />
+  <Description />
+  <Object>
+    <JSONProfile>
+      <DataElements>
+        <JSONRootValue dataType="character" isMappable="false"
+        isNode="true" key="1" name="Root" validateData="false">
+          <DataFormat>
+            <ProfileCharacterFormat />
+          </DataFormat>
+          <JSONObject isMappable="false" isNode="true" key="2"
+          name="Object">
+            <JSONObjectEntry dataType="character" isMappable="true"
+            isNode="true" key="3" name="routing_keyword"
+            validateData="false">
+              <DataFormat>
+                <ProfileCharacterFormat />
+              </DataFormat>
+              <Qualifiers>
+                <QualifierList />
+              </Qualifiers>
+            </JSONObjectEntry>
+            <JSONObjectEntry dataType="character" isMappable="true"
+            isNode="true" key="4" name="justification"
+            validateData="false">
+              <DataFormat>
+                <ProfileCharacterFormat />
+              </DataFormat>
+              <Qualifiers>
+                <QualifierList />
+              </Qualifiers>
+            </JSONObjectEntry>
+          </JSONObject>
+          <Qualifiers>
+            <QualifierList />
+          </Qualifiers>
+        </JSONRootValue>
+      </DataElements>
+      <tagLists />
+    </JSONProfile>
+  </Object>
+</Component>
